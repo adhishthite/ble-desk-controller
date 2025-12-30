@@ -1,0 +1,90 @@
+# General Python ignores
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dylib
+.Python
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# Build output
+build/
+dist/
+wheels/
+pip-wheel-metadata/
+.eggs/
+*/__pycache__/
+
+# FastMCP: cached data, experiments, completed runs (customize as needed)
+fastmcp_cache/
+experiments/
+runs/
+outputs/
+logs/
+results/
+*.fastmcp
+
+# Jupyter and notebook artifacts
+.ipynb_checkpoints/
+*.ipynb
+*.sage.py
+
+# Data files
+data/
+datasets/
+*.csv
+*.tsv
+*.h5
+*.npz
+*.pt
+*.pth
+*.ckpt
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# System/IDE files
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+*.swp
+
+# Security & secrets
+*.env.*
+.envrc
+.secrets/
+*.key
+*.pem
+
+# Test & coverage output
+htmlcov/
+.tox/
+.pytest_cache/
+.coverage
+.coverage.*
+
+# Model artifacts/cache
+models/
+checkpoints/
+*.onnx
+*.tflite
+
+# Miscellaneous
+*.log
+*.tmp
+*.bak
+crash-*
+.ruff_cache/
+.claude/
+.cursor/
