@@ -9,6 +9,7 @@ Control your IKEA Idåsen / Linak standing desk via Bluetooth Low Energy, with M
 - **Memory Presets** - Save and recall 4 favorite positions
 - **Collision Detection** - Automatic stop when obstacles detected
 - **MCP Server** - Expose desk control as LLM tools via Model Context Protocol
+- **LangChain Chat Agent** - Interactive AI with streaming responses and tool visibility
 
 ## Quick Start
 
@@ -23,8 +24,8 @@ Control your IKEA Idåsen / Linak standing desk via Bluetooth Low Energy, with M
 
 ```bash
 # Clone the repo
-git clone <repo-url>
-cd bt
+git clone https://github.com/adhishthite/ble-desk-controller.git
+cd desk-controller
 
 # Install dependencies
 uv sync
@@ -103,6 +104,48 @@ Add to your Claude Desktop or Claude Code config:
 | `save_preset(preset)`       | Save current height to slot (1-4)      |
 | `stop_desk`                 | Emergency stop                         |
 
+## LangChain Chat Agent
+
+Run an interactive AI agent that controls your desk via natural language with streaming responses:
+
+```bash
+# Copy .env.example and add your OpenAI key
+cp .env.example .env
+# Edit .env with your OPENAI_API_KEY
+
+# Run the chat agent
+make chat
+# or: desk-chat
+```
+
+Features:
+- **Streaming responses** - See tokens as they're generated
+- **Tool call visibility** - Watch MCP tools execute in real-time
+- **Conversation memory** - Agent remembers context within the session
+- **Rich terminal UI** - Colored output with panels and formatting
+
+Example interaction:
+
+```
+╭─────────────────────────────────────────────────────────────────╮
+│ Desk Control Agent                                              │
+│ 7 tools: get_height, move_up, move_down, move_to_height, ...    │
+╰─────────────────────────────────────────────────────────────────╯
+
+You: What's my current desk height?
+⚡ get_height
+  → {"height_mm": 750, "height_inches": 29.5}
+Agent: Your desk is currently at 750mm (29.5 inches).
+
+You: Raise it 3 inches
+⚡ move_up(inches=3)
+  → {"new_height_mm": 826, "message": "Moved up 3 inches"}
+Agent: Done! The desk is now at 826mm (32.5 inches).
+
+You: What was it before?
+Agent: It was 750mm before I raised it.
+```
+
 ## Configuration
 
 The desk is found by name pattern matching. By default, it looks for devices containing "Desk".
@@ -150,6 +193,8 @@ desk-controller/
 ├── desk_mcp/                # MCP server package
 │   ├── __init__.py
 │   └── server.py            # FastMCP server
+├── chat.py                  # LangChain streaming chat agent
+├── .env.example             # Environment template
 ├── pyproject.toml           # Project config & dependencies
 ├── Makefile                 # Dev commands
 ├── README.md                # This file

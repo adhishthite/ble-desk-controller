@@ -1,4 +1,4 @@
-.PHONY: install format lint check clean help
+.PHONY: install format lint check clean chat help
 
 # Default target
 help:
@@ -8,6 +8,7 @@ help:
 	@echo "  make lint     - Lint code with ruff"
 	@echo "  make check    - Run format + lint"
 	@echo "  make clean    - Remove cache and build artifacts"
+	@echo "  make chat     - Run interactive desk chat agent"
 
 # Install dependencies
 install:
@@ -23,6 +24,10 @@ lint:
 
 # Check = format + lint
 check: format lint
+
+# Run chat agent
+chat:
+	uv run desk-chat
 
 # Clean artifacts
 clean:
